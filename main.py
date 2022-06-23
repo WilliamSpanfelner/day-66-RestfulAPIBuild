@@ -27,17 +27,22 @@ class Cafe(db.Model):
 
 @app.route("/random")
 def select_random_cafe():
-    # Find the number of records in db
-    record_count = len(Cafe.query.all())
-    # print(record_count)
+    # # Find the number of records in db
+    # record_count = len(Cafe.query.all())
+    # # print(record_count)
+    #
+    # # Create a range and generate a random number from the range
+    # random_index = random.randint(1, record_count)
+    # print(random_index)
+    #
+    # # Print a specific record by index
+    # cafe = Cafe.query.filter_by(id=random_index).first()
+    # print(cafe.name, cafe.img_url, cafe.has_wifi, cafe.location)
 
-    # Create a range and generate a random number from the range
-    random_index = random.randint(1, record_count)
-    print(random_index)
-
-    # Print a specific record by index
-    cafe = Cafe.query.filter_by(id=random_index).first()
-    print(cafe.name, cafe.img_url, cafe.has_wifi, cafe.location)
+    # These two lines will also do the work of the above.
+    cafes = Cafe.query.all()
+    random_cafe = random.choice(cafes)
+    print(random_cafe)
 
     return redirect(url_for('home'))
 
