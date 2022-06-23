@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, render_template, request
+import random
+from flask import Flask, jsonify, render_template, redirect, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -24,6 +25,23 @@ class Cafe(db.Model):
     coffee_price = db.Column(db.String(250), nullable=True)
 
 
+@app.route("/random")
+def select_random_cafe():
+    # Find the number of records in db
+    record_count = len(Cafe.query.all())
+    # print(record_count)
+
+    # Create a range and generate a random number from the range
+    random_index = random.randint(1, record_count)
+    print(random_index)
+
+    # Print a specific record by index
+    cafe = Cafe.query.filter_by(id=random_index).first()
+    print(cafe.name, cafe.img_url, cafe.has_wifi, cafe.location)
+
+    return redirect(url_for('home'))
+
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -36,7 +54,6 @@ def home():
 # HTTP PUT/PATCH - Update Record
 
 # HTTP DELETE - Delete Record
-
 
 if __name__ == '__main__':
     app.run(debug=True)
