@@ -28,7 +28,7 @@ class Cafe(db.Model):
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
 
-@app.route("/update-price/<cafe_id>", methods=['GET', 'PATCH'])
+@app.route("/update-price/<cafe_id>", methods=['PATCH'])
 def update_price(cafe_id):
     cafe = Cafe.query.filter_by(id=cafe_id).first()
     if cafe:
@@ -36,8 +36,8 @@ def update_price(cafe_id):
             new_price = request.args.get('new_price')
             cafe.coffee_price = new_price
             db.session.commit()
-            return jsonify({"success": "Successfully updated the price."})
-    return jsonify(error={"None Found": "Sorry a cafe with that id was not found in the database."})
+            return jsonify({"success": f"Successfully updated the price for {cafe.name}."}), 200
+    return jsonify(error={"None Found": "Sorry a cafe with that id was not found in the database."}), 404
 
 
 @app.route("/add", methods=['POST'])
