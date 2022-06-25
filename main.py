@@ -28,6 +28,18 @@ class Cafe(db.Model):
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
 
+@app.route("/update-price/<cafe_id>", methods=['GET', 'PATCH'])
+def update_price(cafe_id):
+    cafe = Cafe.query.filter_by(id=cafe_id).first()
+    if cafe:
+        if request.method == 'PATCH':
+            new_price = request.args.get('new_price')
+            cafe.coffee_price = new_price
+            db.session.commit()
+            return jsonify({"success": "Successfully updated the price."})
+    return jsonify(error={"None Found": "Sorry a cafe with that id was not found in the database."})
+
+
 @app.route("/add", methods=['POST'])
 def add_cafe():
     if request.method == 'POST':
