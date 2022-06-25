@@ -28,6 +28,17 @@ class Cafe(db.Model):
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
 
+@app.route("/search")
+def list_cafes_by_location():
+    search_text = request.args.get('loc')
+    cafes_at_location = Cafe.query.filter_by(location=search_text).all()
+    cafes = [cafe.to_dict() for cafe in cafes_at_location]
+    if cafes:
+        return jsonify(cafes=cafes)
+    cafes = {"Not Found": "Sorry, we don't have a cafe at that location."}
+    return jsonify(error=cafes)
+
+
 @app.route("/all")
 def list_all_cafes():
     all_cafes = Cafe.query.all()
