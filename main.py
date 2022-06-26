@@ -33,7 +33,7 @@ def delete_record(cafe_id):
     api_key = request.args.get('api-key')
     print(f"api_key is: {api_key}")
     cafe = Cafe.query.filter_by(id=cafe_id).first()
-    if cafe and request.method == 'DELETE':
+    if cafe:
         print(f"You will delete cafe {cafe.id} {cafe.name}")
 
         if api_key == 'TopSecretAPIKey':
