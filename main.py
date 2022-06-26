@@ -39,9 +39,9 @@ def delete_record(cafe_id):
         if api_key == 'TopSecretAPIKey':
             db.session.delete(cafe)
             db.session.commit()
-            return f"Cafe id {cafe.id} {cafe.name} has been deleted"
-        return jsonify({"error": "Sorry, that's not allowed. Make sure you have the correct api_key."})
-    return jsonify(error={"Not Found": "Sorry, a cafe with that id was not found in the database."})
+            return jsonify(response={"success": f"Cafe id {cafe.id} {cafe.name} has been deleted"}), 200
+        return jsonify(error={"Forbidden": "Sorry, that's not allowed. Make sure you have the correct api_key."}), 403
+    return jsonify(error={"Not Found": "Sorry, a cafe with that id was not found in the database."}), 404
 
 
 @app.route("/update-price/<cafe_id>", methods=['PATCH'])
