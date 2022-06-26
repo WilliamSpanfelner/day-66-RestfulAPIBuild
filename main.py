@@ -28,6 +28,22 @@ class Cafe(db.Model):
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
 
+@app.route("/report-closed/<cafe_id>", methods=['DELETE'])
+def delete_record(cafe_id):
+    api_key = request.args.get('api-key')
+    print(f"api_key is: {api_key}")
+    cafe = Cafe.query.filter_by(id=cafe_id).first()
+    if cafe and request.method == 'DELETE':
+        print(f"You will delete cafe {cafe.id} {cafe.name}")
+
+        if api_key == 'TopSecretAPIKey':
+            db.session.delete(cafe)
+            db.session.commit()
+            return f"Cafe id {cafe.id} {cafe.name} has been deleted"
+        return jsonify({"error": "Sorry, that's not allowed. Make sure you have the correct api_key."})
+    return jsonify(error={"Not Found": "Sorry, a cafe with that id was not found in the database."})
+
+
 @app.route("/update-price/<cafe_id>", methods=['PATCH'])
 def update_price(cafe_id):
     cafe = Cafe.query.filter_by(id=cafe_id).first()
