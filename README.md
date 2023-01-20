@@ -1,9 +1,10 @@
-# RESTful API to Favourite Cafe ☕️ database.
+![Screenshot](day-66-RestfulAPIBuild.png)
+# REpresentable State Transfer (REST)ful API to Favourite Cafe ☕️ database.
 - 👋 Hi, I’m @WilliamSpanfelner
 - 👀 I’m interested in using Python with Swift in iOS environments and why it may or may not be desirable.
 - 🌱 I’m currently learning Python with the London App Brewery and Angela Yu's [100 Days of Code: 
 The Complete Python Pro Bootcamp for 2022](https://www.udemy.com/course/100-days-of-code/) on Udemy.  
-- 🧑‍💻 A list of selected cafés and various attributes like coffee price, Wi-Fi rating, and others indicating whether it is possible to get work done.  Add new cafés, update existing entries, find cafés by location and select a random café to spice things up a bit.  A very enjoyable project. 
+- 🧑‍💻 Create, read, update and delete items in a list of selected cafés and various attributes like coffee price, Wi-Fi rating, and others indicating whether it is possible to get work done.  Add new cafés, update existing entries, find cafés by location and select a random café to spice things up a bit using the five http verbs GET, POST, PUT, PATCH and DELETE.  A very enjoyable project. 
 - 💞️ I’m looking to collaborate on application development.
 - 📫 How to reach me...
 
